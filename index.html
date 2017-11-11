@@ -1,22 +1,168 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Hello Bulma!</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
-    </head>
-    <body>
-        <section class="section">
-        <div class="container">
-            <h1 class="title">
-                Hello World
-            </h1>
-            <p class="subtitle">
-            My first website with <strong>Bulma</strong>!
-            </p>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Våga vägra kedjebrev!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+            if ($navbarBurgers.length > 0) {
+                $navbarBurgers.forEach(function ($el) {
+                    $el.addEventListener('click', function () {
+                        var $target = document.getElementById($el.dataset.target);
+                        $el.classList.toggle('is-active');
+                        $target.classList.toggle('is-active');
+                    });
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+<!-- NAV -->
+<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href=""><strong>kedjebrev</strong></a>
+        <div class="navbar-burger" data-target="navMenu">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-        </section>
-    </body>
+    </div>
+    <div class="navbar-menu" id="navMenu">
+        <div class="navbar-start"></div>
+        <div class="navbar-end">
+            <a class="navbar-item" href="#intro">Intro</a>
+            <a class="navbar-item" href="#scare">Skrämsel</a>
+            <a class="navbar-item" href="#peerpressure">Grupptryck</a>
+            <a class="navbar-item" href="#fortune">Spådom</a>
+        </div>
+    </div>
+</nav>
+<!-- INTRO -->
+<section class="hero is-small is-primary" id="intro">
+    <div class="hero-body">
+        <div class="container content">
+            <h1 class="title is-centered">
+                #vågaVägraKedjebrev
+            </h1>
+            <h2 class="subtitle">
+                Hjälp alla genom att hjälpa dig själv
+            </h2>
+            <div class="box">
+                De klassiska kedjebreven kom ofta i två sorter:
+                <ul>
+                    <li>
+                        En person skickar ett brev som skickas vidare till nästa person som skickar vidare till nästa.
+                    </li>
+                    <li>
+                        En person skickar brev till flera personer som gör samma sak med syftet att få
+                        <em>exponentiell spridning</em>
+                    </li>
+                </ul>
+                <p>
+                    De gamla kedjebreven hade som syfte att skapa en slags gemenskap och känsla av delaktighet i världen.
+                    I och med internet och sociala medier finns inte längre det behovet när vem som helst kan kommunicera
+                    med främlingar världen över.
+                </p>
+                <p>
+                    Elektroniska kedjebrev har funnits lika länge som internet.
+                    Eftersom det är mindre krävande att skicka ett email än ett riktigt brev så är det större chans
+                    att folk faktiskt skickar vidare brevet.
+                    Trots detta går det inte att hitta några framgångshistorier eller positiva händelser som kommit från kedjebrev.
+                </p>
+                <p>
+                    Det är så lätt att dela med sig av saker man läser eller ser på internet att den enklaste tumregeln
+                    är att <strong>dela eller skicka inte vidare saker som explicit säger att du ska göra det</strong>.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- IMAGES -->
+<section class="hero is-danger">
+    <div class="hero-body">
+        <div class="content">
+            <h2 class="title is-2">Exempel</h2>
+        </div>
+    </div>
+</section>
+
+<section class="hero is-warning" id="scare">
+    <div class="hero-body">
+        <div class="columns">
+            <div class="content column">
+                <h3 class="title is-3">Skrämsel</h3>
+                <p class="box">
+                    Kedjebrev som försöker spela på rädsla har blivit vanliga.
+                    De försöker spela på folks osäkerhet för att få spridning.
+                    Motivationen till detta
+                </p>
+            </div>
+            <div class="column box">
+                <figure class="image">
+                    <img src="resources/scare.jpg">
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="hero is-primary" id="peerpressure">
+    <div class="hero-body">
+        <div class="columns">
+            <div class="content column">
+                <h3 class="title is-3">Grupptryck</h3>
+                <div class="box">
+                    <p>
+                        En vanlig sorts kedjebrev är de som uppmanar till någon form av popularitetstävling.
+                        <em>Skicka vidare, om du får X svar är du omtyckt annars är du det inte.</em>
+                    </p>
+                    <p>
+                        Den här sortens kedjebrev skulle kunna liknas vid en passiv form av mobbing.
+                    </p>
+                </div>
+            </div>
+            <div class="column box">
+                <figure class="image">
+                    <img src="resources/fortune.jpg">
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hero is-warning" id="fortune">
+    <div class="hero-body">
+        <div class="columns">
+            <div class="content column">
+                <h3 class="title is-3">Spådom</h3>
+                <p class="box">
+                    Spådomsliknande kedjebrev är en av de vanligaste kedjebreven man ser idag.
+                    Den spelar också på rädsla men är oftast fokuserad på dina relationer, att folk tycker om dig.
+                </p>
+            </div>
+            <div class="column box">
+                <figure class="image">
+                    <img src="resources/fortune.jpg">
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="footer">
+    <div class="content has-text-centered">
+
+        <article class="message is-warning">
+            <div class="message-body">
+                Den här sidans enda syfte är att hjälpa att informera människor om kedjebrev så att vi kan bli av med
+                dem en gång för alla.
+            </div>
+        </article>
+        <strong>#vågavägrakedjebrev</strong> av <a href="http://alphadev.se">Leon Hennings</a>
+    </div>
+</footer>
+</body>
 </html>
