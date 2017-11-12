@@ -4,6 +4,7 @@ import Intro from './Intro';
 import Examples from './Examples';
 import Footer from './Footer';
 import History from "./History";
+import '../style/custom.scss';
 
 
 export default class App extends React.Component {
