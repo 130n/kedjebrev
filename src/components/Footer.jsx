@@ -12,7 +12,17 @@ export default class Footer extends React.Component {
                             bli av med dem en gång för alla.
                         </div>
                     </article>
-                    <strong>#vågavägrakedjebrev</strong> av <a href="http://alphadev.se">Leon Hennings</a>
+
+                    <div className="level">
+                        <span className="level-item">
+                            <strong>#vågavägrakedjebrev</strong>&nbsp;av&nbsp;<a href="http://alphadev.se">Leon Hennings</a>
+                        </span>
+                        <div className="level-item">
+                            <a href="https://bulma.io/made-with-bulma/">
+                                <img src="resources/made-with-bulma.png" width="128" height="24"/>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </footer>
         )
