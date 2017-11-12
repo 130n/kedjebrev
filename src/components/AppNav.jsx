@@ -32,7 +32,7 @@ export default class AppNav extends React.Component {
                     <a className="navbar-item" href="">
                         <i className="fa fa-lg fa-chain-broken"/>
                         &nbsp;Kedjebrev&nbsp;<i className="fa fa-lg fa-envelope"/>
-                        &nbsp;=>&nbsp;
+                        &nbsp;<i className="fa fa-long-arrow-right"/>&nbsp;
                         <small>Nej tack</small>
                     </a>
                     <div
