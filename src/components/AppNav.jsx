@@ -29,7 +29,7 @@ export default class AppNav extends React.Component {
         return (
             <nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation">
                 <div className="navbar-brand">
-                    <a className="navbar-item" href=""><strong>kedjebrev</strong></a>
+                    <a className="navbar-item" href="">Kedjebrev:&nbsp;<strong>Nej tack</strong></a>
                     <div
                         className={"navbar-burger" + this.state.navClass}
                         data-target="navMenu"

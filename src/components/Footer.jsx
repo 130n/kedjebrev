@@ -15,7 +15,8 @@ export default class Footer extends React.Component {
 
                     <div className="level">
                         <span className="level-item">
-                            <strong>#vågavägrakedjebrev</strong>&nbsp;av&nbsp;<a href="http://alphadev.se">Leon Hennings</a>
+                            <strong>#vågavägrakedjebrev</strong>&nbsp;av&nbsp;<a
+                            href="http://alphadev.se">Leon Hennings</a>
                         </span>
                         <div className="level-item">
                             <a href="https://bulma.io/made-with-bulma/">
