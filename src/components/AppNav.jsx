@@ -42,7 +42,8 @@ export default class AppNav extends React.Component {
                 <div className={"navbar-menu" + this.state.navClass} id="navMenu">
                     <div className="navbar-start"/>
                     <div className="navbar-end">
-                        <a className="navbar-item" onClick={this.navigate.bind(this, "intro")}>Intro</a>
+                        <a className="navbar-item" onClick={this.navigate.bind(this, "intro")}>Hem</a>
+                        <a className="navbar-item" onClick={this.navigate.bind(this, "history")}>Historia</a>
                         <a className="navbar-item" onClick={this.navigate.bind(this, "scare")}>Skrämsel</a>
                         <a className="navbar-item" onClick={this.navigate.bind(this, "fortune")}>Spådom</a>
                         <a className="navbar-item" onClick={this.navigate.bind(this, "peerpressure")}>Grupptryck</a>

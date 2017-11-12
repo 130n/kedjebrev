@@ -5,7 +5,7 @@ export default class Examples extends React.Component {
     render() {
         return (
             <div>
-                <section className="hero is-danger">
+                <section className="hero is-dark">
                     <div className="hero-body">
                         <div className="content">
                             <h2 className="title is-2">Exempel</h2>
