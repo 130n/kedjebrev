@@ -27120,8 +27120,8 @@
 	    }
 
 	    _createClass(AppNav, [{
-	        key: 'toggle',
-	        value: function toggle() {
+	        key: 'toggleBurger',
+	        value: function toggleBurger() {
 	            this.setState({
 	                toggleBurger: !this.state.toggleBurger,
 	                navClass: !this.state.toggleBurger ? " is-active" : ""
@@ -27151,7 +27151,9 @@
 	                        _react2.default.createElement('i', { className: 'fa fa-lg fa-chain-broken' }),
 	                        '\xA0Kedjebrev\xA0',
 	                        _react2.default.createElement('i', { className: 'fa fa-lg fa-envelope' }),
-	                        '\xA0=>\xA0',
+	                        '\xA0',
+	                        _react2.default.createElement('i', { className: 'fa fa-long-arrow-right' }),
+	                        '\xA0',
 	                        _react2.default.createElement(
 	                            'small',
 	                            null,
@@ -27163,7 +27165,7 @@
 	                        {
 	                            className: "navbar-burger" + this.state.navClass,
 	                            'data-target': 'navMenu',
-	                            onClick: this.toggle.bind(this) },
+	                            onClick: this.toggleBurger.bind(this) },
 	                        _react2.default.createElement('span', null),
 	                        _react2.default.createElement('span', null),
 	                        _react2.default.createElement('span', null)
@@ -27187,19 +27189,33 @@
 	                            'Historia'
 	                        ),
 	                        _react2.default.createElement(
-	                            'a',
-	                            { className: 'navbar-item', onClick: this.navigate.bind(this, "scare") },
-	                            'Skr\xE4msel'
-	                        ),
-	                        _react2.default.createElement(
-	                            'a',
-	                            { className: 'navbar-item', onClick: this.navigate.bind(this, "fortune") },
-	                            'Sp\xE5dom'
-	                        ),
-	                        _react2.default.createElement(
-	                            'a',
-	                            { className: 'navbar-item', onClick: this.navigate.bind(this, "peerpressure") },
-	                            'Grupptryck'
+	                            'div',
+	                            { className: 'navbar-item has-dropdown is-hoverable' },
+	                            _react2.default.createElement(
+	                                'a',
+	                                { className: 'navbar-link', onClick: this.navigate.bind(this, "examples") },
+	                                'Exempel'
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'navbar-dropdown' },
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { className: 'navbar-item', onClick: this.navigate.bind(this, "scare") },
+	                                    'Skr\xE4msel'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { className: 'navbar-item', onClick: this.navigate.bind(this, "fortune") },
+	                                    'Sp\xE5dom'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { className: 'navbar-item',
+	                                        onClick: this.navigate.bind(this, "peerpressure") },
+	                                    'Grupptryck'
+	                                )
+	                            )
 	                        )
 	                    )
 	                )
@@ -28381,6 +28397,10 @@
 
 	var _ExampleItem2 = _interopRequireDefault(_ExampleItem);
 
+	var _reactScrollableAnchor = __webpack_require__(355);
+
+	var _reactScrollableAnchor2 = _interopRequireDefault(_reactScrollableAnchor);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28395,35 +28415,61 @@
 	    function Examples() {
 	        _classCallCheck(this, Examples);
 
-	        return _possibleConstructorReturn(this, (Examples.__proto__ || Object.getPrototypeOf(Examples)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (Examples.__proto__ || Object.getPrototypeOf(Examples)).call(this));
+
+	        _this.state = {
+	            hasError: false
+	        };
+	        return _this;
 	    }
 
 	    _createClass(Examples, [{
+	        key: 'componentDidCatch',
+	        value: function componentDidCatch(error, info) {
+	            // Display fallback UI
+	            this.setState({ hasError: true });
+	            // You can also log the error to an error reporting service
+	            console.log(error, info);
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(
-	                    'section',
-	                    { className: 'hero is-dark' },
+	                !this.state.hasError && _react2.default.createElement(
+	                    'div',
+	                    null,
 	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'hero-body' },
+	                        _reactScrollableAnchor2.default,
+	                        { id: 'examples' },
 	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'content' },
+	                            'section',
+	                            { className: 'hero is-dark' },
 	                            _react2.default.createElement(
-	                                'h2',
-	                                { className: 'title is-2' },
-	                                'Exempel'
+	                                'div',
+	                                { className: 'hero-body' },
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    { className: 'content' },
+	                                    _react2.default.createElement(
+	                                        'h2',
+	                                        { className: 'title is-2' },
+	                                        'Exempel'
+	                                    )
+	                                )
 	                            )
 	                        )
-	                    )
+	                    ),
+	                    _react2.default.createElement(_ExampleItem2.default, { type: 'scare' }),
+	                    _react2.default.createElement(_ExampleItem2.default, { type: 'fortune' }),
+	                    _react2.default.createElement(_ExampleItem2.default, { type: 'peerpressure' })
 	                ),
-	                _react2.default.createElement(_ExampleItem2.default, { type: 'scare' }),
-	                _react2.default.createElement(_ExampleItem2.default, { type: 'fortune' }),
-	                _react2.default.createElement(_ExampleItem2.default, { type: 'peerpressure' })
+	                this.state.hasError && _react2.default.createElement(
+	                    'div',
+	                    { className: 'is-danger' },
+	                    'FEL'
+	                )
 	            );
 	        }
 	    }]);
@@ -28801,7 +28847,7 @@
 	var options = {"hmr":true}
 	options.transform = transform
 	// add the styles to the DOM
-	var update = __webpack_require__(372)(content, options);
+	var update = __webpack_require__(373)(content, options);
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -28821,7 +28867,7 @@
 /* 371 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(374)(undefined);
+	exports = module.exports = __webpack_require__(372)(undefined);
 	// imports
 
 
@@ -28833,6 +28879,88 @@
 
 /***/ }),
 /* 372 */
+/***/ (function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function(useSourceMap) {
+		var list = [];
+
+		// return the list of modules as css string
+		list.toString = function toString() {
+			return this.map(function (item) {
+				var content = cssWithMappingToString(item, useSourceMap);
+				if(item[2]) {
+					return "@media " + item[2] + "{" + content + "}";
+				} else {
+					return content;
+				}
+			}).join("");
+		};
+
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+	function cssWithMappingToString(item, useSourceMap) {
+		var content = item[1] || '';
+		var cssMapping = item[3];
+		if (!cssMapping) {
+			return content;
+		}
+
+		if (useSourceMap && typeof btoa === 'function') {
+			var sourceMapping = toComment(cssMapping);
+			var sourceURLs = cssMapping.sources.map(function (source) {
+				return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+			});
+
+			return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+		}
+
+		return [content].join('\n');
+	}
+
+	// Adapted from convert-source-map (MIT)
+	function toComment(sourceMap) {
+		// eslint-disable-next-line no-undef
+		var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+		var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+		return '/*# ' + data + ' */';
+	}
+
+
+/***/ }),
+/* 373 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -28888,7 +29016,7 @@
 	var	singletonCounter = 0;
 	var	stylesInsertedAtTop = [];
 
-	var	fixUrls = __webpack_require__(373);
+	var	fixUrls = __webpack_require__(374);
 
 	module.exports = function(list, options) {
 		if (false) {
@@ -29204,7 +29332,7 @@
 
 
 /***/ }),
-/* 373 */
+/* 374 */
 /***/ (function(module, exports) {
 
 	
@@ -29296,88 +29424,6 @@
 		// send back the fixed css
 		return fixedCss;
 	};
-
-
-/***/ }),
-/* 374 */
-/***/ (function(module, exports) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	module.exports = function(useSourceMap) {
-		var list = [];
-
-		// return the list of modules as css string
-		list.toString = function toString() {
-			return this.map(function (item) {
-				var content = cssWithMappingToString(item, useSourceMap);
-				if(item[2]) {
-					return "@media " + item[2] + "{" + content + "}";
-				} else {
-					return content;
-				}
-			}).join("");
-		};
-
-		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
-			if(typeof modules === "string")
-				modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if(typeof id === "number")
-					alreadyImportedModules[id] = true;
-			}
-			for(i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if(mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
-	};
-
-	function cssWithMappingToString(item, useSourceMap) {
-		var content = item[1] || '';
-		var cssMapping = item[3];
-		if (!cssMapping) {
-			return content;
-		}
-
-		if (useSourceMap && typeof btoa === 'function') {
-			var sourceMapping = toComment(cssMapping);
-			var sourceURLs = cssMapping.sources.map(function (source) {
-				return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-			});
-
-			return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-		}
-
-		return [content].join('\n');
-	}
-
-	// Adapted from convert-source-map (MIT)
-	function toComment(sourceMap) {
-		// eslint-disable-next-line no-undef
-		var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-		var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-		return '/*# ' + data + ' */';
-	}
 
 
 /***/ })
