@@ -58,7 +58,13 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
+	var _reactScrollableAnchor = __webpack_require__(190);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// Offset all anchors by -60 to account for a fixed header
+	// and scroll more quickly than the default 400ms,
+	(0, _reactScrollableAnchor.configureAnchors)({ offset: -51, scrollDuration: 1000, keepLastAnchorHash: true });
 
 	_reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('root'));
 
@@ -21945,7 +21951,7 @@
 /* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -21956,6 +21962,8 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactScrollableAnchor = __webpack_require__(190);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21971,61 +21979,87 @@
 	    function AppNav() {
 	        _classCallCheck(this, AppNav);
 
-	        return _possibleConstructorReturn(this, (AppNav.__proto__ || Object.getPrototypeOf(AppNav)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (AppNav.__proto__ || Object.getPrototypeOf(AppNav)).call(this));
+
+	        _this.state = {
+	            toggleBurger: false,
+	            navClass: ''
+	        };
+	        return _this;
 	    }
 
 	    _createClass(AppNav, [{
-	        key: "render",
+	        key: 'toggle',
+	        value: function toggle() {
+	            this.setState({
+	                toggleBurger: !this.state.toggleBurger,
+	                navClass: !this.state.toggleBurger ? " is-active" : ""
+	            });
+	        }
+	    }, {
+	        key: 'navigate',
+	        value: function navigate(anchor) {
+	            this.setState({
+	                toggleBurger: false,
+	                navClass: ""
+	            });
+	            (0, _reactScrollableAnchor.goToAnchor)(anchor);
+	        }
+	    }, {
+	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
-	                "nav",
-	                { className: "navbar is-fixed-top", role: "navigation", "aria-label": "main navigation" },
+	                'nav',
+	                { className: 'navbar is-fixed-top', role: 'navigation', 'aria-label': 'main navigation' },
 	                _react2.default.createElement(
-	                    "div",
-	                    { className: "navbar-brand" },
+	                    'div',
+	                    { className: 'navbar-brand' },
 	                    _react2.default.createElement(
-	                        "a",
-	                        { className: "navbar-item", href: "" },
+	                        'a',
+	                        { className: 'navbar-item', href: '' },
 	                        _react2.default.createElement(
-	                            "strong",
+	                            'strong',
 	                            null,
-	                            "kedjebrev"
+	                            'kedjebrev'
 	                        )
 	                    ),
 	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "navbar-burger", "data-target": "navMenu" },
-	                        _react2.default.createElement("span", null),
-	                        _react2.default.createElement("span", null),
-	                        _react2.default.createElement("span", null)
+	                        'div',
+	                        {
+	                            className: "navbar-burger" + this.state.navClass,
+	                            'data-target': 'navMenu',
+	                            onClick: this.toggle.bind(this) },
+	                        _react2.default.createElement('span', null),
+	                        _react2.default.createElement('span', null),
+	                        _react2.default.createElement('span', null)
 	                    )
 	                ),
 	                _react2.default.createElement(
-	                    "div",
-	                    { className: "navbar-menu", id: "navMenu" },
-	                    _react2.default.createElement("div", { className: "navbar-start" }),
+	                    'div',
+	                    { className: "navbar-menu" + this.state.navClass, id: 'navMenu' },
+	                    _react2.default.createElement('div', { className: 'navbar-start' }),
 	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "navbar-end" },
+	                        'div',
+	                        { className: 'navbar-end' },
 	                        _react2.default.createElement(
-	                            "a",
-	                            { className: "navbar-item", ref: "#intro" },
-	                            "Intro"
+	                            'a',
+	                            { className: 'navbar-item', onClick: this.navigate.bind(this, "intro") },
+	                            'Intro'
 	                        ),
 	                        _react2.default.createElement(
-	                            "a",
-	                            { className: "navbar-item", ref: "#scare" },
-	                            "Skr\xE4msel"
+	                            'a',
+	                            { className: 'navbar-item', onClick: this.navigate.bind(this, "scare") },
+	                            'Skr\xE4msel'
 	                        ),
 	                        _react2.default.createElement(
-	                            "a",
-	                            { className: "navbar-item", ref: "#peerpressure" },
-	                            "Grupptryck"
+	                            'a',
+	                            { className: 'navbar-item', onClick: this.navigate.bind(this, "fortune") },
+	                            'Sp\xE5dom'
 	                        ),
 	                        _react2.default.createElement(
-	                            "a",
-	                            { className: "navbar-item", ref: "#fortune" },
-	                            "Sp\xE5dom"
+	                            'a',
+	                            { className: 'navbar-item', onClick: this.navigate.bind(this, "peerpressure") },
+	                            'Grupptryck'
 	                        )
 	                    )
 	                )
@@ -22042,7 +22076,7 @@
 /* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -22053,6 +22087,10 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactScrollableAnchor = __webpack_require__(190);
+
+	var _reactScrollableAnchor2 = _interopRequireDefault(_reactScrollableAnchor);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22072,70 +22110,74 @@
 	    }
 
 	    _createClass(Intro, [{
-	        key: "render",
+	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
-	                "section",
-	                { className: "hero is-small is-primary", id: "intro" },
+	                _reactScrollableAnchor2.default,
+	                { id: 'intro' },
 	                _react2.default.createElement(
-	                    "div",
-	                    { className: "hero-body" },
+	                    'section',
+	                    { className: 'hero is-small is-primary' },
 	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "container content" },
+	                        'div',
+	                        { className: 'hero-body' },
 	                        _react2.default.createElement(
-	                            "h1",
-	                            { className: "title is-centered" },
-	                            "#v\xE5gaV\xE4graKedjebrev"
-	                        ),
-	                        _react2.default.createElement(
-	                            "h2",
-	                            { className: "subtitle" },
-	                            "Hj\xE4lp alla genom att hj\xE4lpa dig sj\xE4lv"
-	                        ),
-	                        _react2.default.createElement(
-	                            "div",
-	                            { className: "box" },
-	                            "De klassiska kedjebreven kom ofta i tv\xE5 sorter:",
+	                            'div',
+	                            { className: 'container content' },
 	                            _react2.default.createElement(
-	                                "ul",
-	                                null,
+	                                'h1',
+	                                { className: 'title is-centered' },
+	                                '#v\xE5gaV\xE4graKedjebrev'
+	                            ),
+	                            _react2.default.createElement(
+	                                'h2',
+	                                { className: 'subtitle' },
+	                                'Hj\xE4lp alla genom att hj\xE4lpa dig sj\xE4lv'
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'box' },
+	                                'De klassiska kedjebreven kom ofta i tv\xE5 sorter:',
 	                                _react2.default.createElement(
-	                                    "li",
+	                                    'ul',
 	                                    null,
-	                                    "En person skickar ett brev som skickas vidare till n\xE4sta person som skickar vidare till n\xE4sta."
-	                                ),
-	                                _react2.default.createElement(
-	                                    "li",
-	                                    null,
-	                                    "En person skickar brev till flera personer som g\xF6r samma sak med syftet att f\xE5",
 	                                    _react2.default.createElement(
-	                                        "em",
+	                                        'li',
 	                                        null,
-	                                        "exponentiell spridning"
+	                                        'En person skickar ett brev som skickas vidare till n\xE4sta person som skickar vidare till n\xE4sta.'
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        'li',
+	                                        null,
+	                                        'En person skickar brev till flera personer som g\xF6r samma sak med syftet att f\xE5',
+	                                        _react2.default.createElement(
+	                                            'em',
+	                                            null,
+	                                            'exponentiell spridning'
+	                                        )
 	                                    )
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                "p",
-	                                null,
-	                                "De gamla kedjebreven hade som syfte att skapa en slags gemenskap och k\xE4nsla av delaktighet i v\xE4rlden. I och med internet och sociala medier finns inte l\xE4ngre det behovet n\xE4r vem som helst kan kommunicera med fr\xE4mlingar v\xE4rlden \xF6ver."
-	                            ),
-	                            _react2.default.createElement(
-	                                "p",
-	                                null,
-	                                "Elektroniska kedjebrev har funnits lika l\xE4nge som internet. Eftersom det \xE4r mindre kr\xE4vande att skicka ett email \xE4n ett riktigt brev s\xE5 \xE4r det st\xF6rre chans att folk faktiskt skickar vidare brevet. Trots detta g\xE5r det inte att hitta n\xE5gra framg\xE5ngshistorier eller positiva h\xE4ndelser som kommit fr\xE5n kedjebrev."
-	                            ),
-	                            _react2.default.createElement(
-	                                "p",
-	                                null,
-	                                "Det \xE4r s\xE5 l\xE4tt att dela med sig av saker man l\xE4ser eller ser p\xE5 internet att den enklaste tumregeln \xE4r att ",
-	                                _react2.default.createElement(
-	                                    "strong",
-	                                    null,
-	                                    "dela eller skicka inte vidare saker som explicit s\xE4ger att du ska g\xF6ra det"
 	                                ),
-	                                "."
+	                                _react2.default.createElement(
+	                                    'p',
+	                                    null,
+	                                    'De gamla kedjebreven hade som syfte att skapa en slags gemenskap och k\xE4nsla av delaktighet i v\xE4rlden. I och med internet och sociala medier finns inte l\xE4ngre det behovet n\xE4r vem som helst kan kommunicera med fr\xE4mlingar v\xE4rlden \xF6ver. Inga av de positiva tendenserna finns kvar i spridningen av kedjebrev idag.'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'p',
+	                                    null,
+	                                    'Elektroniska kedjebrev har funnits lika l\xE4nge som internet. Eftersom det \xE4r mindre kr\xE4vande att skicka ett email \xE4n ett riktigt brev s\xE5 \xE4r det st\xF6rre chans att folk faktiskt skickar vidare brevet. Trots detta g\xE5r det inte att hitta n\xE5gra framg\xE5ngshistorier eller positiva h\xE4ndelser som kommit fr\xE5n kedjebrev.'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'p',
+	                                    null,
+	                                    'Det \xE4r s\xE5 l\xE4tt att dela med sig av saker man l\xE4ser eller ser p\xE5 internet att den enklaste tumregeln \xE4r att ',
+	                                    _react2.default.createElement(
+	                                        'strong',
+	                                        null,
+	                                        'dela eller skicka inte vidare saker som explicit s\xE4ger att du ska g\xF6ra det'
+	                                    ),
+	                                    '.'
+	                                )
 	                            )
 	                        )
 	                    )
@@ -22225,7 +22267,7 @@
 /* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -22236,6 +22278,10 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactScrollableAnchor = __webpack_require__(190);
+
+	var _reactScrollableAnchor2 = _interopRequireDefault(_reactScrollableAnchor);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22249,42 +22295,66 @@
 	    peerpressure: {
 	        title: "Grupptryck",
 	        image: "resources/fortune.jpg",
+	        colorClass: "is-danger",
 	        content: _react2.default.createElement(
-	            "div",
+	            'div',
 	            null,
 	            _react2.default.createElement(
-	                "p",
+	                'p',
 	                null,
-	                "En vanlig sorts kedjebrev \xE4r de som uppmanar till n\xE5gon form av popularitetst\xE4vling.",
+	                'En vanlig sorts kedjebrev \xE4r de som uppmanar till n\xE5gon form av popularitetst\xE4vling.',
 	                _react2.default.createElement(
-	                    "em",
+	                    'em',
 	                    null,
-	                    "Skicka vidare, om du f\xE5r X svar \xE4r du omtyckt annars \xE4r du det inte."
-	                )
+	                    'Skicka vidare, om du f\xE5r X svar \xE4r du omtyckt annars \xE4r du det inte.'
+	                ),
+	                'Den h\xE4r sortens kedjebrev skulle kunna liknas vid en passiv form av mobbing.'
 	            ),
 	            _react2.default.createElement(
-	                "p",
+	                'p',
 	                null,
-	                "Den h\xE4r sortens kedjebrev skulle kunna liknas vid en passiv form av mobbing."
+	                'Eftersom de spelar p\xE5 skuldbel\xE4ggning och f\xF6rv\xE4ntningen att bli besvarad s\xE5 \xE4r det h\xE4r den formen av kedjebrev som p\xE5verkar anh\xF6riga till spridare mest.'
 	            )
 	        )
 	    },
 	    scare: {
 	        title: "Skrämsel",
 	        image: "resources/scare.jpg",
+	        colorClass: "is-dark",
 	        content: _react2.default.createElement(
-	            "p",
+	            'div',
 	            null,
-	            "Kedjebrev som f\xF6rs\xF6ker spela p\xE5 r\xE4dsla har blivit vanliga. De f\xF6rs\xF6ker spela p\xE5 folks os\xE4kerhet f\xF6r att f\xE5 spridning. Motivationen till detta"
+	            _react2.default.createElement(
+	                'p',
+	                null,
+	                'Kedjebrev som f\xF6rs\xF6ker spela p\xE5 r\xE4dsla har blivit vanligare. De utnyttjar folks okunskap och godhet f\xF6r att f\xE5 spridning. Ofta \xE4r det varningar f\xF6r fiktiva bedr\xE4gerier d\xE4r p\xE5hittade personer namnges, vilket f\xF6rv\xE4ntas ge trov\xE4rdighet till historien.'
+	            ),
+	            _react2.default.createElement(
+	                'p',
+	                null,
+	                'Deras enda resultat \xE4r att de skapar r\xE4dsla och oros vilket g\xF6r att de fungerar som en slags terrorism.'
+	            )
 	        )
 	    },
 	    fortune: {
 	        title: "Spådom",
 	        image: "resources/fortune.jpg",
+	        colorClass: "is-warning",
 	        content: _react2.default.createElement(
-	            "p",
+	            'div',
 	            null,
-	            "Sp\xE5domsliknande kedjebrev \xE4r en av de vanligaste kedjebreven man ser idag. Den spelar ocks\xE5 p\xE5 r\xE4dsla men \xE4r oftast fokuserad p\xE5 dina relationer, att folk tycker om dig."
+	            _react2.default.createElement(
+	                'p',
+	                null,
+	                'Sp\xE5domsliknande kedjebrev \xE4r en av de vanligaste kedjebreven man ser idag.',
+	                _react2.default.createElement(
+	                    'em',
+	                    null,
+	                    'Om du skickar vidare det h\xE4r till sju andra s\xE5 kommer du f\xE5 lycka/pengar/framg\xE5ng.'
+	                ),
+	                'Den spelar ocks\xE5 p\xE5 r\xE4dsla men \xE4r oftast fokuserad p\xE5 dina relationer, att folk tycker om dig.'
+	            ),
+	            _react2.default.createElement('p', null)
 	        )
 	    }
 
@@ -22300,39 +22370,43 @@
 	    }
 
 	    _createClass(ExampleItem, [{
-	        key: "render",
+	        key: 'render',
 	        value: function render() {
 	            var type = types[this.props.type];
 	            return _react2.default.createElement(
-	                "section",
-	                { className: "hero is-primary", id: this.props.type },
+	                _reactScrollableAnchor2.default,
+	                { id: this.props.type },
 	                _react2.default.createElement(
-	                    "div",
-	                    { className: "hero-body" },
+	                    'section',
+	                    { className: 'hero ' + type.colorClass },
 	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "columns" },
+	                        'div',
+	                        { className: 'hero-body' },
 	                        _react2.default.createElement(
-	                            "div",
-	                            { className: "content column" },
+	                            'div',
+	                            { className: 'columns' },
 	                            _react2.default.createElement(
-	                                "h3",
-	                                { className: "title is-3" },
-	                                type.title
+	                                'div',
+	                                { className: 'content column' },
+	                                _react2.default.createElement(
+	                                    'h3',
+	                                    { className: 'title is-3' },
+	                                    type.title
+	                                ),
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    { className: 'box' },
+	                                    type.content
+	                                )
 	                            ),
 	                            _react2.default.createElement(
-	                                "div",
-	                                { className: "box" },
-	                                type.content
-	                            )
-	                        ),
-	                        _react2.default.createElement(
-	                            "div",
-	                            { className: "column box" },
-	                            _react2.default.createElement(
-	                                "figure",
-	                                { className: "image" },
-	                                _react2.default.createElement("img", { src: type.image })
+	                                'div',
+	                                { className: 'column box' },
+	                                _react2.default.createElement(
+	                                    'figure',
+	                                    { className: 'image' },
+	                                    _react2.default.createElement('img', { src: type.image })
+	                                )
 	                            )
 	                        )
 	                    )
@@ -22417,6 +22491,527 @@
 	}(_react2.default.Component);
 
 	exports.default = Footer;
+
+/***/ }),
+/* 190 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = exports.removeHash = exports.goToAnchor = exports.configureAnchors = exports.goToTop = undefined;
+
+	var _hash = __webpack_require__(191);
+
+	Object.defineProperty(exports, 'goToAnchor', {
+	  enumerable: true,
+	  get: function get() {
+	    return _hash.updateHash;
+	  }
+	});
+	Object.defineProperty(exports, 'removeHash', {
+	  enumerable: true,
+	  get: function get() {
+	    return _hash.removeHash;
+	  }
+	});
+
+	var _ScrollableAnchor = __webpack_require__(192);
+
+	Object.defineProperty(exports, 'default', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_ScrollableAnchor).default;
+	  }
+	});
+
+	var _Manager = __webpack_require__(195);
+
+	var _Manager2 = _interopRequireDefault(_Manager);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var goToTop = exports.goToTop = _Manager2.default.goToTop;
+	var configureAnchors = exports.configureAnchors = _Manager2.default.configure;
+
+/***/ }),
+/* 191 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var getHash = exports.getHash = function getHash() {
+	  return window.location.hash.slice(1);
+	};
+
+	var updateHash = exports.updateHash = function updateHash(hash, affectHistory) {
+	  if (affectHistory) {
+	    window.location.hash = hash;
+	  } else {
+	    window.location.replace("#" + hash);
+	  }
+	};
+
+	// remove hash in url without affecting history or forcing reload
+	var removeHash = exports.removeHash = function removeHash() {
+	  history.replaceState("", document.title, window.location.pathname + window.location.search);
+	};
+
+/***/ }),
+/* 192 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(37);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _propTypes = __webpack_require__(193);
+
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+
+	var _Manager = __webpack_require__(195);
+
+	var _Manager2 = _interopRequireDefault(_Manager);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ScrollableAnchor = function (_Component) {
+	  _inherits(ScrollableAnchor, _Component);
+
+	  function ScrollableAnchor(props) {
+	    _classCallCheck(this, ScrollableAnchor);
+
+	    var _this = _possibleConstructorReturn(this, (ScrollableAnchor.__proto__ || Object.getPrototypeOf(ScrollableAnchor)).call(this, props));
+
+	    _this.id = props.id || props.children.ref;
+	    return _this;
+	  }
+
+	  _createClass(ScrollableAnchor, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var element = _reactDom2.default.findDOMNode(this.refs[Object.keys(this.refs)[0]]);
+	      _Manager2.default.addAnchor(this.id, element);
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      _Manager2.default.removeAnchor(this.id);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          children = _props.children,
+	          id = _props.id;
+
+
+	      return _react2.default.cloneElement(children, {
+	        ref: children.ref || id
+	      });
+	    }
+	  }]);
+
+	  return ScrollableAnchor;
+	}(_react.Component);
+
+	ScrollableAnchor.propTypes = {
+	  children: _propTypes2.default.node,
+	  id: _propTypes2.default.string
+	};
+	exports.default = ScrollableAnchor;
+
+/***/ }),
+/* 193 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 */
+
+	if (process.env.NODE_ENV !== 'production') {
+	  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
+	    Symbol.for &&
+	    Symbol.for('react.element')) ||
+	    0xeac7;
+
+	  var isValidElement = function(object) {
+	    return typeof object === 'object' &&
+	      object !== null &&
+	      object.$$typeof === REACT_ELEMENT_TYPE;
+	  };
+
+	  // By explicitly using `prop-types` you are opting into new development behavior.
+	  // http://fb.me/prop-types-in-prod
+	  var throwOnDirectAccess = true;
+	  module.exports = __webpack_require__(30)(isValidElement, throwOnDirectAccess);
+	} else {
+	  // By explicitly using `prop-types` you are opting into new production behavior.
+	  // http://fb.me/prop-types-in-prod
+	  module.exports = __webpack_require__(194)();
+	}
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ }),
+/* 194 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 */
+
+	'use strict';
+
+	var emptyFunction = __webpack_require__(9);
+	var invariant = __webpack_require__(12);
+	var ReactPropTypesSecret = __webpack_require__(31);
+
+	module.exports = function() {
+	  function shim(props, propName, componentName, location, propFullName, secret) {
+	    if (secret === ReactPropTypesSecret) {
+	      // It is still safe when called from React.
+	      return;
+	    }
+	    invariant(
+	      false,
+	      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+	      'Use PropTypes.checkPropTypes() to call them. ' +
+	      'Read more at http://fb.me/use-check-prop-types'
+	    );
+	  };
+	  shim.isRequired = shim;
+	  function getShim() {
+	    return shim;
+	  };
+	  // Important!
+	  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
+	  var ReactPropTypes = {
+	    array: shim,
+	    bool: shim,
+	    func: shim,
+	    number: shim,
+	    object: shim,
+	    string: shim,
+	    symbol: shim,
+
+	    any: shim,
+	    arrayOf: getShim,
+	    element: shim,
+	    instanceOf: getShim,
+	    node: shim,
+	    objectOf: getShim,
+	    oneOf: getShim,
+	    oneOfType: getShim,
+	    shape: getShim,
+	    exact: getShim
+	  };
+
+	  ReactPropTypes.checkPropTypes = emptyFunction;
+	  ReactPropTypes.PropTypes = ReactPropTypes;
+
+	  return ReactPropTypes;
+	};
+
+
+/***/ }),
+/* 195 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _jump = __webpack_require__(196);
+
+	var _jump2 = _interopRequireDefault(_jump);
+
+	var _func = __webpack_require__(197);
+
+	var _scroll = __webpack_require__(198);
+
+	var _hash = __webpack_require__(191);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var defaultConfig = {
+	  offset: 0,
+	  scrollDuration: 400,
+	  keepLastAnchorHash: false
+	};
+
+	var Manager = function Manager() {
+	  var _this = this;
+
+	  _classCallCheck(this, Manager);
+
+	  this.addListeners = function () {
+	    window.addEventListener('scroll', _this.scrollHandler, false);
+	    window.addEventListener('hashchange', _this.handleHashChange);
+	  };
+
+	  this.removeListeners = function () {
+	    window.removeEventListener('scroll', _this.scrollHandler, false);
+	    window.removeEventListener('hashchange', _this.handleHashChange);
+	  };
+
+	  this.configure = function (config) {
+	    _this.config = _extends({}, defaultConfig, config);
+	  };
+
+	  this.goToTop = function () {
+	    if ((0, _scroll.getScrollTop)() === 0) return;
+	    _this.forcedHash = true;
+	    window.scroll(0, 0);
+	  };
+
+	  this.addAnchor = function (id, component) {
+	    // if this is the first anchor, set up listeners
+	    if (Object.keys(_this.anchors).length === 0) {
+	      _this.addListeners();
+	    }
+	    _this.forceHashUpdate();
+	    _this.anchors[id] = component;
+	  };
+
+	  this.removeAnchor = function (id) {
+	    delete _this.anchors[id];
+	    // if this is the last anchor, remove listeners
+	    if (Object.keys(_this.anchors).length === 0) {
+	      _this.removeListeners();
+	    }
+	  };
+
+	  this.handleScroll = function () {
+	    var _config = _this.config,
+	        offset = _config.offset,
+	        keepLastAnchorHash = _config.keepLastAnchorHash;
+
+	    var bestAnchorId = (0, _scroll.getBestAnchorGivenScrollLocation)(_this.anchors, offset);
+
+	    if (bestAnchorId && (0, _hash.getHash)() !== bestAnchorId) {
+	      _this.forcedHash = true;
+	      (0, _hash.updateHash)(bestAnchorId, false);
+	    } else if (!bestAnchorId && !keepLastAnchorHash) {
+	      (0, _hash.removeHash)();
+	    }
+	  };
+
+	  this.handleHashChange = function (e) {
+	    if (_this.forcedHash) {
+	      _this.forcedHash = false;
+	    } else {
+	      _this.goToSection((0, _hash.getHash)());
+	    }
+	  };
+
+	  this.goToSection = function (id) {
+	    var element = _this.anchors[id];
+	    if (element) {
+	      (0, _jump2.default)(element, {
+	        duration: _this.config.scrollDuration,
+	        offset: _this.config.offset
+	      });
+	    } else {
+	      // make sure that standard hash anchors don't break.
+	      // simply jump to them.
+	      element = document.getElementById(id);
+	      if (element) {
+	        (0, _jump2.default)(element, {
+	          duration: 0,
+	          offset: _this.config.offset
+	        });
+	      }
+	    }
+	  };
+
+	  this.anchors = {};
+	  this.forcedHash = false;
+	  this.config = defaultConfig;
+
+	  this.scrollHandler = (0, _func.debounce)(this.handleScroll, 100);
+	  this.forceHashUpdate = (0, _func.debounce)(this.handleHashChange, 1);
+	};
+
+	exports.default = new Manager();
+
+/***/ }),
+/* 196 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/*!
+	 * Jump.js 1.0.1 - A small, modern, dependency-free smooth scrolling library.
+	 * Copyright (c) 2016 Michael Cavalea - https://github.com/callmecavs/jump.js
+	 * License: MIT
+	 */
+
+	!function(o,n){ true?module.exports=n():"function"==typeof define&&define.amd?define(n):o.Jump=n()}(this,function(){"use strict";var o=function(o,n,e,t){return o/=t/2,o<1?e/2*o*o+n:(o--,-e/2*(o*(o-2)-1)+n)},n="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(o){return typeof o}:function(o){return o&&"function"==typeof Symbol&&o.constructor===Symbol?"symbol":typeof o},e=function(){function e(){return window.scrollY||window.pageYOffset}function t(o){return o.getBoundingClientRect().top+d}function i(o){v||(v=o),b=o-v,p=s(b,d,y,m),window.scrollTo(0,p),b<m?requestAnimationFrame(i):r()}function r(){window.scrollTo(0,d+y),c&&l&&(c.setAttribute("tabindex","-1"),c.focus()),"function"==typeof w&&w(),v=!1}function u(r){var u=arguments.length<=1||void 0===arguments[1]?{}:arguments[1];switch(m=u.duration||1e3,a=u.offset||0,w=u.callback,s=u.easing||o,l=u.a11y||!1,d=e(),"undefined"==typeof r?"undefined":n(r)){case"number":c=void 0,l=!1,f=d+r;break;case"object":c=r,f=t(c);break;case"string":c=document.querySelector(r),f=t(c)}switch(y=f-d+a,n(u.duration)){case"number":m=u.duration;break;case"function":m=u.duration(y)}requestAnimationFrame(i)}var c=void 0,d=void 0,f=void 0,a=void 0,s=void 0,l=void 0,y=void 0,m=void 0,v=void 0,b=void 0,p=void 0,w=void 0;return u},t=e();return t});
+
+/***/ }),
+/* 197 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var _arguments = arguments;
+	var debounce = exports.debounce = function debounce(func, wait, immediate) {
+	  var timeout = void 0;
+	  return function () {
+	    var context = undefined;
+	    var args = _arguments;
+	    var later = function later() {
+	      timeout = null;
+	      if (!immediate) {
+	        func.apply(context, args);
+	      }
+	    };
+	    var callNow = immediate && !timeout;
+	    clearTimeout(timeout);
+	    timeout = setTimeout(later, wait);
+	    if (callNow) {
+	      func.apply(context, args);
+	    }
+	  };
+	};
+
+/***/ }),
+/* 198 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var getScrollTop = exports.getScrollTop = function getScrollTop() {
+	  return document.body.scrollTop || document.documentElement.scrollTop;
+	};
+
+	// get vertical offsets of element, taking scrollTop into consideration
+	var getElementOffset = exports.getElementOffset = function getElementOffset(element) {
+	  var scrollTop = getScrollTop();
+
+	  var _element$getBoundingC = element.getBoundingClientRect(),
+	      top = _element$getBoundingC.top,
+	      bottom = _element$getBoundingC.bottom;
+
+	  return {
+	    top: top + scrollTop,
+	    bottom: bottom + scrollTop
+	  };
+	};
+
+	// does scrollTop live within element bounds?
+	var doesElementContainScrollTop = exports.doesElementContainScrollTop = function doesElementContainScrollTop(element) {
+	  var extraOffset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+	  var scrollTop = getScrollTop();
+	  var offsetTop = getElementOffset(element).top + extraOffset;
+	  return scrollTop >= offsetTop && scrollTop < offsetTop + element.offsetHeight;
+	};
+
+	// is el2's location more relevant than el2,
+	// parent-child relationship aside?
+	var checkLocationRelevance = exports.checkLocationRelevance = function checkLocationRelevance(el1, el2) {
+	  var _getElementOffset = getElementOffset(el1),
+	      top1 = _getElementOffset.top,
+	      bottom1 = _getElementOffset.bottom;
+
+	  var _getElementOffset2 = getElementOffset(el2),
+	      top2 = _getElementOffset2.top,
+	      bottom2 = _getElementOffset2.bottom;
+
+	  if (top1 === top2) {
+	    if (bottom1 === bottom2) {
+	      // top and bottom of compared elements are the same,
+	      // so return one randomly in a deterministic way
+	      return el1 < el2;
+	    }
+	    // top of compared elements is the same, so return whichever
+	    // element has its bottom higher on the page
+	    return bottom2 < bottom1;
+	  }
+	  // top of compared elements differ, so return true
+	  // if tested element has its top lower on the page
+	  return top2 > top1;
+	};
+
+	// check if el2 is more relevant than el1, considering child-parent
+	// relationships as well as node location.
+	var checkElementRelevance = exports.checkElementRelevance = function checkElementRelevance(el1, el2) {
+	  if (el1.contains(el2)) {
+	    // el2 is child, so it gains relevance priority
+	    return true;
+	  } else if (!el2.contains(el1) && checkLocationRelevance(el1, el2)) {
+	    // el1 and el2 are unrelated, but el2 has a better location,
+	    // so it gains relevance priority
+	    return true;
+	  }
+	  return false;
+	};
+
+	// given a set of anchors, find which one is, given the following logic:
+	// 1. children nodes are more relevant than parent nodes
+	// 2. if neither node contains the other, and their top locations differ,
+	//    the node with the top lower on the page is more relevant
+	// 3. if neither node contains the other, and their top locations are the same,
+	//    the node with the bottom higher on the page is more relevant
+	// 4. if neither node contains the other, and their top and bottom locations
+	//    are the same, a node is chosen at random, in a deterministic way,
+	//    to be more relevant.
+	var getBestAnchorGivenScrollLocation = exports.getBestAnchorGivenScrollLocation = function getBestAnchorGivenScrollLocation(anchors, offset) {
+	  var bestId = void 0,
+	      bestElement = void 0;
+
+	  Object.keys(anchors).forEach(function (id) {
+	    var element = anchors[id];
+	    if (doesElementContainScrollTop(element, offset)) {
+	      if (!bestElement || checkElementRelevance(bestElement, element)) {
+	        bestElement = element;
+	        bestId = id;
+	      }
+	    }
+	  });
+	  return bestId;
+	};
 
 /***/ })
 /******/ ]);

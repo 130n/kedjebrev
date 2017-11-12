@@ -6,26 +6,9 @@
     <title>Våga vägra kedjebrev!</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-            if ($navbarBurgers.length > 0) {
-                $navbarBurgers.forEach(function ($el) {
-                    $el.addEventListener('click', function () {
-                        var $target = document.getElementById($el.dataset.target);
-                        $el.classList.toggle('is-active');
-                        $target.classList.toggle('is-active');
-                    });
-                });
-            }
-        });
-    </script>
 </head>
 <body>
-<div id="root">
-    no react
-</div>
-
+<div id="root"></div>
 </body>
 <script type="text/javascript" src="dist/index_bundle.js"></script>
 </html>
